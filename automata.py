@@ -19,10 +19,7 @@ class Cell:
 
     def swapState(self):
         if self.newState != None:
-            self.state, self.newState = self.newState, None
-
-    def updateState(self, newState):
-        self.newState = newState
+            self.state = self.newState
 
     def __repr__(self):
         return f"<Cell: State = {self.state}>"

@@ -6,9 +6,9 @@ def gameOfLife(cell):
     if cell.state == "alive" and (
         cell.countNeighbours("alive") < 2 or cell.countNeighbours("alive") > 3
     ):
-        cell.updateState("dead")
-    if cell.state == "dead" and cell.countNeighbours("alive") == 3:
-        cell.updateState("alive")
+        cell.newState = "dead"
+    elif cell.state == "dead" and cell.countNeighbours("alive") == 3:
+        cell.newState = "alive"
 
 
 def main():
