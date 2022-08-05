@@ -16,15 +16,16 @@ def main():
     AUTOMATA_WIDTH, AUTOMATA_HEIGTH = 10, 10
 
     root = tkinter.Tk()
+    root.title("Conway's Game of Life")
+
     canvas = tkinter.Canvas(root, bg="white", width=CANVAS_WIDTH, height=CANVAS_HEIGTH)
+    canvas.pack()
 
     automata = GridAutomata(AUTOMATA_WIDTH, AUTOMATA_HEIGTH)
     automata.randomizeState(("alive", "dead"))
     colors = {"alive": "green", "dead": "red"}
 
     def updateCanvas():
-        automata.update(gameOfLife)
-
         for row in automata.cells:
             for cell in row:
                 x1 = cell.id[0] * CANVAS_WIDTH / AUTOMATA_WIDTH
@@ -32,8 +33,8 @@ def main():
                 x2 = (cell.id[0] + 1) * CANVAS_WIDTH / AUTOMATA_WIDTH
                 y2 = (cell.id[1] + 1) * CANVAS_HEIGTH / AUTOMATA_HEIGTH
                 canvas.create_rectangle(x1, y1, x2, y2, fill=colors[cell.state])
-        canvas.pack()
-        canvas.after(1000, updateCanvas)
+        automata.update(gameOfLife)
+        canvas.after(500, updateCanvas)
 
     updateCanvas()
     root.mainloop()
