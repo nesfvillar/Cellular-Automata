@@ -8,7 +8,8 @@ class Cell:
         self.neighbours = []
 
     def addNeighbour(self, cell):
-        self.neighbours.append(cell)
+        if cell != None:
+            self.neighbours.append(cell)
 
     def countNeighbours(self, state):
         i = 0
@@ -57,50 +58,20 @@ class GridAutomata(Automata):
         self.width = width
         self.heigth = heigth
 
-        self.cells = [
-            [CellId(defaultState, (i, j)) for i in range(self.width)]
-            for j in range(self.heigth)
-        ]
+        cells = {}
+        for i in range(self.width):
+            for j in range(self.heigth):
+                cells[(i, j)] = CellId(defaultState, (i, j))
 
         for i in range(self.width):
             for j in range(self.heigth):
-                if i > 0:
-                    if j < self.heigth - 1:
-                        self.cells[i][j].addNeighbour(self.cells[i - 1][j + 1])
-                    self.cells[i][j].addNeighbour(self.cells[i - 1][j])
-                    if j > 0:
-                        self.cells[i][j].addNeighbour(self.cells[i - 1][j - 1])
-                if i < self.width - 1:
-                    if j < self.heigth - 1:
-                        self.cells[i][j].addNeighbour(self.cells[i + 1][j + 1])
-                    self.cells[i][j].addNeighbour(self.cells[i + 1][j])
-                    if j > 0:
-                        self.cells[i][j].addNeighbour(self.cells[i + 1][j - 1])
-                if j > 0:
-                    self.cells[i][j].addNeighbour(self.cells[i][j - 1])
-                if j < self.heigth - 1:
-                    self.cells[i][j].addNeighbour(self.cells[i][j + 1])
+                cells[(i, j)].addNeighbour(cells.get((i - 1, j + 1)))
+                cells[(i, j)].addNeighbour(cells.get((i - 1, j)))
+                cells[(i, j)].addNeighbour(cells.get((i - 1, j - 1)))
+                cells[(i, j)].addNeighbour(cells.get((i, j + 1)))
+                cells[(i, j)].addNeighbour(cells.get((i, j - 1)))
+                cells[(i, j)].addNeighbour(cells.get((i + 1, j + 1)))
+                cells[(i, j)].addNeighbour(cells.get((i + 1, j)))
+                cells[(i, j)].addNeighbour(cells.get((i + 1, j - 1)))
 
-    def update(self, func):
-        for row in self.cells:
-            for cell in row:
-                func(cell)
-        for row in self.cells:
-            for cell in row:
-                cell.swapState()
-
-    def randomizeState(self, possibleStates):
-        for row in self.cells:
-            for cell in row:
-                cell.state = random.choice(possibleStates)
-
-    def __str__(self):
-        gridString = ""
-        for i in range(self.width):
-            for j in range(self.heigth):
-                if self.cells[i][j].state == "alive":
-                    gridString += "A"
-                elif self.cells[i][j].state == "dead":
-                    gridString += "D"
-            gridString += "\n"
-        return gridString
+        super().__init__(list(cells.values()))

@@ -26,13 +26,12 @@ def main():
     colors = {"alive": "green", "dead": "red"}
 
     def updateCanvas():
-        for row in automata.cells:
-            for cell in row:
-                x1 = cell.id[0] * CANVAS_WIDTH / AUTOMATA_WIDTH
-                y1 = cell.id[1] * CANVAS_HEIGTH / AUTOMATA_HEIGTH
-                x2 = (cell.id[0] + 1) * CANVAS_WIDTH / AUTOMATA_WIDTH
-                y2 = (cell.id[1] + 1) * CANVAS_HEIGTH / AUTOMATA_HEIGTH
-                canvas.create_rectangle(x1, y1, x2, y2, fill=colors[cell.state])
+        for cell in automata.cells:
+            x1 = cell.id[0] * CANVAS_WIDTH / AUTOMATA_WIDTH
+            y1 = cell.id[1] * CANVAS_HEIGTH / AUTOMATA_HEIGTH
+            x2 = (cell.id[0] + 1) * CANVAS_WIDTH / AUTOMATA_WIDTH
+            y2 = (cell.id[1] + 1) * CANVAS_HEIGTH / AUTOMATA_HEIGTH
+            canvas.create_rectangle(x1, y1, x2, y2, fill=colors[cell.state])
         automata.update(gameOfLife)
         canvas.after(500, updateCanvas)
 
