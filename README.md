@@ -3,6 +3,8 @@
 Cellular-Automata is a base system for the many models of automata theory.
 It includes a basic window for 2D visualization, and an easy to use rule making system.
 
+![Example](image.png)
+
 ## Rule making
 
 The rules for Conway's game of life are very easy to implement.
