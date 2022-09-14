@@ -22,25 +22,25 @@ class GameOfLife(GridAutomata):
 
 
 def main():
-    CANVAS_WIDTH, CANVAS_HEIGTH = 640, 640
-    AUTOMATA_WIDTH, AUTOMATA_HEIGTH = 10, 10
+    CANVAS_WIDTH, CANVAS_HEIGHT = 640, 640
+    AUTOMATA_WIDTH, AUTOMATA_HEIGHT = 10, 10
 
     root = tkinter.Tk()
     root.title("Conway's Game of Life")
 
-    canvas = tkinter.Canvas(root, bg="white", width=CANVAS_WIDTH, height=CANVAS_HEIGTH)
+    canvas = tkinter.Canvas(root, bg="white", width=CANVAS_WIDTH, height=CANVAS_HEIGHT)
     canvas.pack()
 
-    game_of_life = GameOfLife(AUTOMATA_WIDTH, AUTOMATA_HEIGTH)
+    game_of_life = GameOfLife(AUTOMATA_WIDTH, AUTOMATA_HEIGHT)
     game_of_life.randomize_state()
 
     def update_canvas():
         for row in game_of_life.cells:
             for cell in row:
                 x1 = cell.position.x * CANVAS_WIDTH / AUTOMATA_WIDTH
-                y1 = cell.position.y * CANVAS_HEIGTH / AUTOMATA_HEIGTH
+                y1 = cell.position.y * CANVAS_HEIGHT / AUTOMATA_HEIGHT
                 x2 = (cell.position.x + 1) * CANVAS_WIDTH / AUTOMATA_WIDTH
-                y2 = (cell.position.y + 1) * CANVAS_HEIGTH / AUTOMATA_HEIGTH
+                y2 = (cell.position.y + 1) * CANVAS_HEIGHT / AUTOMATA_HEIGHT
                 canvas.create_rectangle(x1, y1, x2, y2, fill=game_of_life.colours[cell.get_state()])
         game_of_life.update()
         canvas.after(500, update_canvas)
