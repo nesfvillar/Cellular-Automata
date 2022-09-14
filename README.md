@@ -13,12 +13,12 @@ Change only the newState.
 
 ```python
 def gameOfLife(cell):
-    if cell.state == "alive" and (
-        cell.countNeighbours("alive") < 2 or cell.countNeighbours("alive") > 3
+    if cell.get_state() == "alive" and (
+        cell.count_neighbours("alive") < 2 or cell.count_neighbours("alive") > 3
     ):
-        cell.newState = "dead"
-    elif cell.state == "dead" and cell.countNeighbours("alive") == 3:
-        cell.newState = "alive"
+        cell.new_state("dead")
+    elif cell.get_state == "dead" and cell.count_neighbours("alive") == 3:
+        cell.new_state("alive")
 ```
 
 ## Colouring the cells
