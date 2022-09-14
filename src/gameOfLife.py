@@ -28,8 +28,7 @@ def main():
     root = tkinter.Tk()
     root.title("Conway's Game of Life")
 
-    canvas = tkinter.Canvas(
-        root, bg="white", width=CANVAS_WIDTH, height=CANVAS_HEIGTH)
+    canvas = tkinter.Canvas(root, bg="white", width=CANVAS_WIDTH, height=CANVAS_HEIGTH)
     canvas.pack()
 
     game_of_life = GameOfLife(AUTOMATA_WIDTH, AUTOMATA_HEIGTH)
