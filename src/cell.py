@@ -5,13 +5,12 @@ class Cell:
         self.neighbours = []
 
     def add_neighbour(self, cell):
-        if cell is not None:
-            self.neighbours.append(cell)
+        self.neighbours.append(cell)
 
     def count_neighbours(self, state):
         i = 0
         for neighbour in self.neighbours:
-            if neighbour.get_state() == state:
+            if neighbour is not None and neighbour.get_state() == state:
                 i += 1
         return i
 
