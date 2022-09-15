@@ -12,12 +12,11 @@ The only thing you should be aware of is to never change the state of the cell m
 Change only the newState.
 
 ```python
-def gameOfLife(cell):
-    if cell.get_state() == "alive" and (
-        cell.count_neighbours("alive") < 2 or cell.count_neighbours("alive") > 3
-    ):
+@staticmethod
+def rules(cell):
+    if cell.get_state() == "alive" and (cell.count_neighbours("alive") < 2 or cell.count_neighbours("alive") > 3):
         cell.new_state("dead")
-    elif cell.get_state == "dead" and cell.count_neighbours("alive") == 3:
+    elif cell.get_state() == "dead" and cell.count_neighbours("alive") == 3:
         cell.new_state("alive")
 ```
 
