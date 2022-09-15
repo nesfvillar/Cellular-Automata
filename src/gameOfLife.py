@@ -1,9 +1,10 @@
-from gridAutomata import *
 import tkinter
+
+from gridAutomata import *
 
 
 class GameOfLife(GridAutomata):
-    def __init__(self, width, height, colours={"alive": "green", "dead": "red"}, default_state="dead"):
+    def __init__(self, width, height, colours, default_state="dead"):
         super().__init__(width, height, default_state)
         self.colours = colours
 
@@ -31,7 +32,7 @@ def main():
     canvas = tkinter.Canvas(root, bg="white", width=CANVAS_WIDTH, height=CANVAS_HEIGHT)
     canvas.pack()
 
-    game_of_life = GameOfLife(AUTOMATA_WIDTH, AUTOMATA_HEIGHT)
+    game_of_life = GameOfLife(AUTOMATA_WIDTH, AUTOMATA_HEIGHT, {"alive": "green", "dead": "red"})
     game_of_life.randomize_state()
 
     def update_canvas():
